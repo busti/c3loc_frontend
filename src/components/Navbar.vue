@@ -7,7 +7,7 @@
             </button>
             <div class="dropdown-menu bg-dark" aria-labelledby="dropdownMenuButton">
                 <a class="dropdown-item text-light" href="#" v-for="(event, index) in events" v-bind:key="index"
-                   :class="{ active: event === activeEvent }">{{ event }}</a>
+                   :class="{ active: event === activeEvent }" @click="changeEvent(event)">{{ event }}</a>
             </div>
         </div>
 
@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import {mapState} from 'vuex';
+import { mapState, mapActions } from 'vuex';
 
 
 export default {
@@ -52,10 +52,10 @@ export default {
     ]
   }),
   computed: {
-    ...mapState({
-      events: state => state.events,
-      activeEvent: state => state.activeEvent
-    })
+    ...mapState(['events', 'activeEvent'])
+  },
+  methods: {
+    ...mapActions(['changeEvent'])
   }
 };
 </script>
