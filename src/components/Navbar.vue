@@ -11,7 +11,7 @@
             </div>
         </div>
 
-        <div class="custom-control-inline">
+        <div class="custom-control-inline mr-1">
             <button type="button" class="btn mx-1 text-nowrap" v-for="(button, index) in buttons" v-bind:key="index" :class="['btn-' + button.color]">
                 <font-awesome-icon :icon="button.icon"/>&nbsp;{{ button.title }}
             </button>
