@@ -15,6 +15,14 @@
             <button type="button" class="btn mx-1 text-nowrap" v-for="(button, index) in buttons" v-bind:key="index" :class="['btn-' + button.color]">
                 <font-awesome-icon :icon="button.icon"/><span class="d-none d-md-inline">&nbsp;{{ button.title }}</span>
             </button>
+            <div class="btn-group btn-group-toggle">
+                <button :class="['btn', 'btn-info', { active: layout === 'cards' }]" @click="setLayout('cards')">
+                    <font-awesome-icon icon="th"/>
+                </button>
+                <button :class="['btn', 'btn-info', { active: layout === 'table' }]" @click="setLayout('table')">
+                    <font-awesome-icon icon="list"/>
+                </button>
+            </div>
         </div>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -38,7 +46,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex';
+import { mapState, mapActions, mapMutations } from 'vuex';
 
 
 export default {
@@ -48,14 +56,14 @@ export default {
     buttons: [
       { title: 'Add', icon: 'plus', color: 'success' },
       { title: 'Refresh', icon: 'sync-alt', color: 'primary' },
-      { title: 'Placeholder', icon: 'cat', color: 'warning' },
     ]
   }),
   computed: {
-    ...mapState(['events', 'activeEvent'])
+    ...mapState(['events', 'activeEvent', 'layout']),
   },
   methods: {
-    ...mapActions(['changeEvent'])
+    ...mapActions(['changeEvent']),
+    ...mapMutations(['setLayout'])
   }
 };
 </script>

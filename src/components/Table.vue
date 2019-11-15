@@ -3,10 +3,10 @@
         <thead>
             <tr>
                 <th scope="col" v-for="(column, index) in columns" :key="index">
-                    <button class="btn text-light" v-on:click="toggleSort(column)">
+                    <button class="btn text-light" @click="toggleSort(column)">
                         {{ column }}
                         <span :class="{ 'text-info': column === sortBy }">
-                            <font-awesome-icon :icon="sortIcon(column)"/>
+                            <font-awesome-icon :icon="getSortIcon(column)"/>
                         </span>
                     </button>
                 </th>
@@ -21,34 +21,11 @@
 </template>
 
 <script>
-import * as R from 'ramda';
+import DataContainer from '@/mixins/data-container';
 
 export default {
   name: 'Table',
-  props: ['columns', 'items', 'keyName'],
-  data: (self) => ({
-    sortBy: self.keyName,
-    ascend: true
-  }),
-  computed: {
-    internalItems() {
-      const sortByOrd = R.sortBy(R.prop(this.sortBy));
-      const sorted = sortByOrd(this.items, [this.sortBy]);
-      return this.ascend ? sorted : R.reverse(sorted);
-    }
-  },
-  methods: {
-    sortIcon(column) {
-      if (column !== this.sortBy) return 'sort';
-      if (this.ascend) return 'sort-up';
-      return 'sort-down';
-    },
-    toggleSort(column) {
-      if (column === this.sortBy)
-        this.ascend = !this.ascend;
-      this.sortBy = column;
-    }
-  }
+  mixins: [DataContainer]
 };
 </script>
 

@@ -1,9 +1,18 @@
 <template>
     <div id="app">
         <Navbar/>
-
-        <div class="container mt-2">
-            <Table
+        <div class="container-fluid px-xl-5 mt-3">
+            <div class="row" v-if="layout === 'table'">
+                <div class="col-xl-8 offset-xl-2">
+                    <Table
+                        :columns="['uid', 'description', 'box', 'image']"
+                        :items="loadedItems"
+                        :keyName="'uid'"
+                    />
+                </div>
+            </div>
+            <Cards
+                v-if="layout === 'cards'"
                 :columns="['uid', 'description', 'box', 'image']"
                 :items="loadedItems"
                 :keyName="'uid'"
@@ -15,12 +24,13 @@
 <script>
 import Table from '@/components/Table';
 import Navbar from '@/components/Navbar';
+import Cards from '@/components/Cards';
 import { mapState } from 'vuex';
 
 export default {
   name: 'app',
-  components: { Navbar, Table },
-  computed: mapState(['loadedItems'])
+  components: { Navbar, Table, Cards },
+  computed: mapState(['loadedItems', 'layout'])
 };
 </script>
 
