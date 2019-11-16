@@ -1,6 +1,6 @@
 <template>
     <div class="row">
-        <div class="col-lg-3 col-xl-3">
+        <div class="col-lg-3 col-xl-2">
             <div class="card bg-dark text-light mb-2" id="filters">
                 <div class="card-body">
                     <h5 class="card-title text-info">Sort & Filter</h5>

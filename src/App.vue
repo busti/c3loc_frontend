@@ -19,7 +19,7 @@
                 v-slot="{ item }"
             >
                 <img
-                    :src="`https://picsum.photos/id/${item.uid + 50}/200/200`"
+                    :src="`https://picsum.photos/id/${item.image + 50}/200/200`"
                     alt="item"
                     class="card-img-top img-fluid"
                 >
@@ -29,6 +29,7 @@
                 </div>
             </Cards>
         </div>
+        <Modal/>
     </div>
 </template>
 
@@ -37,10 +38,11 @@ import Table from '@/components/Table';
 import Navbar from '@/components/Navbar';
 import Cards from '@/components/Cards';
 import { mapState } from 'vuex';
+import Modal from '@/components/Modal';
 
 export default {
   name: 'app',
-  components: { Navbar, Table, Cards },
+  components: {Modal, Navbar, Table, Cards },
   computed: mapState(['loadedItems', 'layout'])
 };
 </script>

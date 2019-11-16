@@ -15,7 +15,7 @@ export default new Vuex.Store({
       { uid: 4, description: 'power supply black', box: 5, image: 62 },
       { uid: 5, description: 'pullover yellow "pesthörnchen"', box: 5, image: 84 },
       { uid: 6, description: '"blue black second skin"', box: 6, image: 72 },
-      { uid: 7, description: '"the bike blog" bottle orange', box: 6, image: 71 },
+      { uid: 7, description: '"the bike blog" bottle orange', box: 6, image: 83 },
       { uid: 8, description: 'tshirt guad3c', box: 6, image: 26 },
       { uid: 9, description: 'power supply dell', box: 6, image: 74 },
       { uid: 10, description: 'blanket green blue', box: 6, image: 25 },
