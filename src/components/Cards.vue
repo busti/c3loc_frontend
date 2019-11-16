@@ -1,6 +1,6 @@
 <template>
     <div class="row">
-        <div class="col-lg-3 col-xl-2">
+        <div class="col-lg-3 col-xl-3">
             <div class="card bg-dark text-light mb-2" id="filters">
                 <div class="card-body">
                     <h5 class="card-title text-info">Sort & Filter</h5>
@@ -29,16 +29,8 @@
         </div>
         <div class="col-lg-9 col-xl-8">
             <transition-group name="card-list" tag="div" class="card-columns">
-                <div class="card-list-item card bg-dark text-light" v-for="item in internalItems" :key="item.uid">
-                    <img
-                        :src="`https://picsum.photos/id/${item.uid + 50}/200/200`"
-                        alt="item"
-                        class="card-img-top img-fluid"
-                    >
-                    <div class="card-body">
-                        <h6 class="card-title">{{ item.description }}</h6>
-                        <h6 class="card-subtitle text-secondary">uid: {{ item.uid }} box: {{ item.box }}</h6>
-                    </div>
+                <div class="card-list-item card bg-dark text-light" v-for="item in internalItems" :key="item[keyName]">
+                    <slot v-bind:item="item"/>
                 </div>
             </transition-group>
         </div>
@@ -59,7 +51,7 @@ export default {
 
 <style>
     .card-list-item {
-        transition: all 1s;
+        transition: all 1s ease-in-out;
     }
 
     .card-list-enter, .card-list-leave-to {

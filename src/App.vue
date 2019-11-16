@@ -16,7 +16,18 @@
                 :columns="['uid', 'description', 'box', 'image']"
                 :items="loadedItems"
                 :keyName="'uid'"
-            />
+                v-slot="{ item }"
+            >
+                <img
+                    :src="`https://picsum.photos/id/${item.uid + 50}/200/200`"
+                    alt="item"
+                    class="card-img-top img-fluid"
+                >
+                <div class="card-body">
+                    <h6 class="card-title">{{ item.description }}</h6>
+                    <h6 class="card-subtitle text-secondary">uid: {{ item.uid }} box: {{ item.box }}</h6>
+                </div>
+            </Cards>
         </div>
     </div>
 </template>
