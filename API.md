@@ -4,7 +4,7 @@ Version major.minor
  - minor: compatible addition
 
 ## Notes
-json endpoints return a list should always be encapsulated ba an object to make non-breaking api changes easier, like this example
+json endpoints returning a list should always be encapsulated ba an object to make non-breaking api changes easier, like this example
 ```json
     {"events":[{},{},{}]}
 ```
