@@ -37,7 +37,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item" v-for="(link, index) in links" v-bind:key="index">
-                    <a class="nav-link text-nowrap" href="#">{{ link }}</a>
+                    <a class="nav-link text-nowrap" :href="link.path">{{ link.title }}</a>
                 </li>
             </ul>
         </div>
@@ -52,7 +52,12 @@ import { mapState, mapActions, mapMutations } from 'vuex';
 export default {
   name: 'Navbar',
   data: () => ({
-    links: ['items', 'boxes', 'mass-edit', 'howto engel'],
+    links: [
+      {'title':'items','path':'/'},
+      {'title':'boxes','path':'/boxes/'},
+      {'title':'mass-edit','path':'#'},
+      {'title':'howto engel','path':'/howto/'}
+    ],
     buttons: [
       { title: 'Add', icon: 'plus', color: 'success' },
       { title: 'Refresh', icon: 'sync-alt', color: 'primary' },
