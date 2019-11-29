@@ -50,9 +50,6 @@ export default {
 </script>
 
 <style>
-    .card-list-item {
-        transition: all 1s ease-in-out;
-    }
 
     .card-list-enter, .card-list-leave-to {
         opacity: 0;

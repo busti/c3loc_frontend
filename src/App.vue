@@ -29,7 +29,6 @@
                 </div>
             </Cards>
         </div>
-        <Modal/>
     </div>
 </template>
 
@@ -38,11 +37,10 @@ import Table from '@/components/Table';
 import Navbar from '@/components/Navbar';
 import Cards from '@/components/Cards';
 import { mapState } from 'vuex';
-import Modal from '@/components/Modal';
 
 export default {
   name: 'app',
-  components: {Modal, Navbar, Table, Cards },
+  components: { Navbar, Table, Cards },
   computed: mapState(['loadedItems', 'layout'])
 };
 </script>

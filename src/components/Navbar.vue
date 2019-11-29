@@ -52,7 +52,7 @@ import { mapState, mapActions, mapMutations } from 'vuex';
 export default {
   name: 'Navbar',
   data: () => ({
-    links: ['items', 'boxes', 'mass-edit'],
+    links: ['items', 'boxes', 'mass-edit', 'howto engel'],
     buttons: [
       { title: 'Add', icon: 'plus', color: 'success' },
       { title: 'Refresh', icon: 'sync-alt', color: 'primary' },
