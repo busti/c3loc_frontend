@@ -1,4 +1,4 @@
-# API 0.1
+# API 0.2
 Version major.minor
  - major: braking change
  - minor: compatible addition
@@ -12,30 +12,30 @@ json endpoints returning a list should always be encapsulated ba an object to ma
 ##Endpoints
 ### Items
 
-#### ``GET /api/<version>/<event.id>/items``
+#### ``GET /api/<version.major>/<event.id>/items``
 
-#### ``GET /api/<version>/<event.id>/items/<search_query>``
-the <search_query> should be url-encoded
+#### ``GET /api/<version.major>/<event.id>/items/<search_query>``
+Returns all results of a fuzzy search over all items for <search_query>. The <search_query> should be url-encoded. 
 
-#### ``GET /api/<version>/<event.id>/item/<item.id>``
+#### ``GET /api/<version.major>/<event.id>/item/<item.id>``
 
-#### ``DELETE /api/<version>/<event.id>/item/<item.id>``
+#### ``DELETE /api/<version.major>/<event.id>/item/<item.id>``
 
-#### ``PUT /api/<version>/<event.id>/item/<item.id>``
+#### ``PUT /api/<version.major>/<event.id>/item/<item.id>``
 
-#### ``POST /api/<version>/<event.id>/item/<item.id>``
+#### ``POST /api/<version.major>/<event.id>/item/<item.id>``
 
 ### Boxes
 
-#### ``GET /api/<version>/<event.id>/boxes``
+#### ``GET /api/<version.major>/<event.id>/boxes``
 
-#### ``GET /api/<version>/<event.id>/box/<box.id>``
+#### ``GET /api/<version.major>/<event.id>/box/<box.id>``
 
-#### ``DELETE /api/<version>/<event.id>/box/<box.id>``
+#### ``DELETE /api/<version.major>/<event.id>/box/<box.id>``
 
-#### ``PUT /api/<version>/<event.id>/box/<box.id>``
+#### ``PUT /api/<version.major>/<event.id>/box/<box.id>``
 
-#### ``POST /api/<version>/<event.id>/box/<box.id>``
+#### ``POST /api/<version.major>/<event.id>/box/<box.id>``
 
 ### Events
 ```json
@@ -49,7 +49,7 @@ the <search_query> should be url-encoded
 }
 ```
 
-#### ``GET /api/<version>/events``
+#### ``GET /api/<version.major>/events``
 
 returns a list of all tracked events
 
