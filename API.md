@@ -27,15 +27,15 @@ Returns all results of a fuzzy search over all items for <search_query>. The <se
 
 ### Boxes
 
-#### ``GET /api/<version.major>/<event.id>/boxes``
+#### ``GET /api/<version.major>/boxes``
 
-#### ``GET /api/<version.major>/<event.id>/box/<box.id>``
+#### ``GET /api/<version.major>/box/<box.id>``
 
-#### ``DELETE /api/<version.major>/<event.id>/box/<box.id>``
+#### ``DELETE /api/<version.major>/box/<box.id>``
 
-#### ``PUT /api/<version.major>/<event.id>/box/<box.id>``
+#### ``PUT /api/<version.major>/box/<box.id>``
 
-#### ``POST /api/<version.major>/<event.id>/box/<box.id>``
+#### ``POST /api/<version.major>/box/<box.id>``
 
 ### Events
 ```json
