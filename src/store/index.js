@@ -5,7 +5,11 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    events: ['35c3', 'camp19', '36c3'],
+    events: [
+      {'slug': '35c3'},
+      {'slug': 'camp19'},
+      {'slug': '36c3'}
+    ],
     activeEvent: '36c3',
     layout: 'cards',
     loadedItems: [

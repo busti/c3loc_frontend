@@ -7,7 +7,7 @@
             </button>
             <div class="dropdown-menu bg-dark" aria-labelledby="dropdownMenuButton">
                 <a class="dropdown-item text-light" href="#" v-for="(event, index) in events" v-bind:key="index"
-                   :class="{ active: event === activeEvent }" @click="changeEvent(event)">{{ event }}</a>
+                   :class="{ active: event === activeEvent }" @click="changeEvent(event)">{{ event.slug }}</a>
             </div>
         </div>
 
@@ -36,6 +36,18 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
+                <li class="nav-item dropdown">
+                    <button class="btn nav-link dropdown-toggle" type="button" id="dropdownMenuButton"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {{ views[0].title }}
+                    </button>
+                    <ul class="dropdown-menu bg-dark" aria-labelledby="dropdownMenuButton">
+                        <li class="" v-for="(link, index) in views" v-bind:key="index">
+                            <a class="nav-link text-nowrap" :href="link.path">{{ link.title }}</a>
+                        </li>
+                    </ul>
+                </li>
+
                 <li class="nav-item" v-for="(link, index) in links" v-bind:key="index">
                     <a class="nav-link text-nowrap" :href="link.path">{{ link.title }}</a>
                 </li>
@@ -52,10 +64,12 @@ import { mapState, mapActions, mapMutations } from 'vuex';
 export default {
   name: 'Navbar',
   data: () => ({
-    links: [
-      {'title':'items','path':'/'},
+    views: [
+      {'title':'items','path':'/items/'},
       {'title':'boxes','path':'/boxes/'},
-      {'title':'mass-edit','path':'#'},
+      {'title':'mass-edit','path':'/#'},
+    ],
+    links: [
       {'title':'howto engel','path':'/howto/'}
     ],
     buttons: [
