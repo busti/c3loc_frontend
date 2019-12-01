@@ -1,7 +1,7 @@
 <template>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
         <div class="dropdown">
-            <button class="btn text-light dropdown-toggle" type="button" id="dropdownMenuButton"
+            <button class="btn text-light dropdown-toggle btn-heading" type="button" id="dropdownMenuButton"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 {{ activeEvent }}
             </button>
@@ -60,7 +60,7 @@ export default {
     ],
     buttons: [
       { title: 'Add', icon: 'plus', color: 'success' },
-      { title: 'Refresh', icon: 'sync-alt', color: 'primary' },
+      //{ title: 'Refresh', icon: 'sync-alt', color: 'primary' },
     ]
   }),
   computed: {
@@ -72,3 +72,7 @@ export default {
   }
 };
 </script>
+
+<style lang="scss">
+    @import "../scss/navbar.scss";
+</style>

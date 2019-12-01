@@ -1,0 +1,10 @@
+button.btn-heading {
+  font-size: 2em;
+  padding: 0 .75rem;
+  line-height: 1em;
+}
+
+.btn-heading::after {
+  font-size: 0.5em;
+  line-height: 2em;
+}
