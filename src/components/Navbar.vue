@@ -3,7 +3,7 @@
         <div class="dropdown">
             <button class="btn text-light dropdown-toggle btn-heading" type="button" id="dropdownMenuButton"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                {{ activeEvent }}
+                {{ activeEvent.slug }}
             </button>
             <div class="dropdown-menu bg-dark" aria-labelledby="dropdownMenuButton">
                 <a class="dropdown-item text-light" href="#" v-for="(event, index) in events" v-bind:key="index"

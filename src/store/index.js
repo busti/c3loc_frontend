@@ -6,11 +6,11 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     events: [
-      {'slug': '35c3'},
+      {'slug': '35C3'},
       {'slug': 'camp19'},
-      {'slug': '36c3'}
+      {'slug': '36C3'}
     ],
-    activeEvent: '36c3',
+    activeEvent: {'slug': '36C3'},
     layout: 'cards',
     loadedItems: [
       { uid: 1, description: 'sleeping bag', box: 7, image: 41 },
