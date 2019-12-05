@@ -3,11 +3,11 @@
         <div class="dropdown">
             <button class="btn text-light dropdown-toggle btn-heading" type="button" id="dropdownMenuButton"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                {{ activeEvent.slug }}
+                {{getEventSlug}}
             </button>
             <div class="dropdown-menu bg-dark" aria-labelledby="dropdownMenuButton">
                 <a class="dropdown-item text-light" href="#" v-for="(event, index) in events" v-bind:key="index"
-                   :class="{ active: event === activeEvent }" @click="changeEvent(event)">{{ event.slug }}</a>
+                   :class="{ active: event.slug === getEventSlug }" @click="changeEvent(event)">{{ event.slug }}</a>
             </div>
         </div>
 
@@ -58,7 +58,7 @@
 </template>
 
 <script>
-import { mapState, mapActions, mapMutations } from 'vuex';
+import { mapState, mapActions, mapMutations, mapGetters} from 'vuex';
 
 
 export default {
@@ -79,6 +79,7 @@ export default {
   }),
   computed: {
     ...mapState(['events', 'activeEvent', 'layout']),
+      ...mapGetters(['getEventSlug']),
   },
   methods: {
     ...mapActions(['changeEvent']),

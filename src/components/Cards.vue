@@ -28,11 +28,11 @@
             </div>
         </div>
         <div class="col-lg-9 col-xl-8">
-            <transition-group name="card-list" tag="div" class="card-columns">
+            <div class="card-columns">
                 <div class="card-list-item card bg-dark text-light" v-for="item in internalItems" :key="item[keyName]">
                     <slot v-bind:item="item"/>
                 </div>
-            </transition-group>
+            </div>
         </div>
     </div>
 </template>
@@ -48,14 +48,3 @@ export default {
   }
 };
 </script>
-
-<style>
-
-    .card-list-enter, .card-list-leave-to {
-        opacity: 0;
-    }
-
-    .card-list-leave-active {
-        position: absolute;
-    }
-</style>

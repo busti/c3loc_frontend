@@ -1,6 +1,8 @@
 import Vue from 'vue';
 import App from './App.vue';
 import store from './store';
+import router from './router';
+import { sync } from 'vuex-router-sync';
 
 // bootstrap
 import 'jquery/dist/jquery.min.js';
@@ -12,12 +14,17 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { faPlus, faCheckCircle, faEdit, faTrash, faCat, faSyncAlt, faSort, faSortUp, faSortDown, faTh, faList, faWindowClose } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
+
 library.add(faPlus, faCheckCircle, faEdit, faTrash, faCat, faSyncAlt, faSort, faSortUp, faSortDown, faTh, faList, faWindowClose);
 
+
 Vue.component('font-awesome-icon', FontAwesomeIcon);
+
+sync(store, router);
 
 new Vue({
   el: '#app',
   store,
+  router,
   render: h => h(App),
 });
