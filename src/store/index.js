@@ -4,7 +4,10 @@ import axios from 'axios';
 //import * as _ from 'lodash/fp';
 import router from '../router';
 
+import getAuth from './auth';
+
 Vue.use(Vuex);
+
 
 const store = new Vuex.Store({
   state: {
@@ -34,10 +37,7 @@ const store = new Vuex.Store({
   actions: {
     async loadEvents({ commit }) {
       const resp = await axios.get('https://c3lf.de/api/1/events',  {
-        auth: {
-          username: process.env.VUE_APP_CONFIG_API_USER,
-          password: process.env.VUE_APP_CONFIG_API_PASSWORD
-        }
+        auth: getAuth(),
       });
 
       commit('replaceEvents', resp.data);
@@ -48,10 +48,7 @@ const store = new Vuex.Store({
     },
     async loadEventItems({ commit, state }) {
       const resp = await axios.get(`https://c3lf.de/api/1/${state.route.params.event}/items`,  {
-        auth: {
-          username: process.env.VUE_APP_CONFIG_API_USER,
-          password: process.env.VUE_APP_CONFIG_API_PASSWORD
-        }
+        auth: getAuth(),
       });
 
       console.log(resp.data);
