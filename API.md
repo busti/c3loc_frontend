@@ -56,3 +56,5 @@ returns a list of all tracked events
 ### Files/Images
 
 #### ``GET /api/<version.major>/images/<file.hash>``
+
+#### ``GET /api/<version.major>/thumbs/<file.hash>``
