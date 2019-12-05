@@ -36,9 +36,6 @@ import { mapState } from 'vuex';
 export default {
   name: 'Items',
   components: { Table, Cards },
-  created() {
-    console.log(this.$route.params.event);
-  },
   computed: mapState(['loadedItems', 'layout']),
 };
 </script>

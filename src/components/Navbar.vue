@@ -39,11 +39,11 @@
                 <li class="nav-item dropdown">
                     <button class="btn nav-link dropdown-toggle" type="button" id="dropdownMenuButton"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        {{ views[0].title }}
+                        {{getActiveView}}
                     </button>
                     <ul class="dropdown-menu bg-dark" aria-labelledby="dropdownMenuButton">
-                        <li class="" v-for="(link, index) in views" v-bind:key="index">
-                            <a class="nav-link text-nowrap" :href="link.path">{{ link.title }}</a>
+                        <li class="" v-for="(link, index) in views" v-bind:key="index" :class="{ active: link.path === getActiveView }">
+                            <a class="nav-link text-nowrap" href="#" @click="changeView(link)">{{ link.title }}</a>
                         </li>
                     </ul>
                 </li>
@@ -65,8 +65,8 @@ export default {
   name: 'Navbar',
   data: () => ({
     views: [
-      {'title':'items','path':'/items/'},
-      {'title':'boxes','path':'/boxes/'},
+      {'title':'items','path':'items'},
+      {'title':'boxes','path':'boxes'},
       {'title':'mass-edit','path':'/#'},
     ],
     links: [
@@ -79,10 +79,10 @@ export default {
   }),
   computed: {
     ...mapState(['events', 'activeEvent', 'layout']),
-      ...mapGetters(['getEventSlug']),
+    ...mapGetters(['getEventSlug', 'getActiveView']),
   },
   methods: {
-    ...mapActions(['changeEvent']),
+    ...mapActions(['changeEvent', 'changeView']),
     ...mapMutations(['setLayout'])
   }
 };
