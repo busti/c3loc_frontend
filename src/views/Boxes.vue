@@ -3,8 +3,8 @@
         <div class="row">
             <div class="col-xl-8 offset-xl-2">
                 <Table
-                    :columns="['iid', 'item_uid', 'bezeichnung', 'container']"
-                    :items="[]"
+                    :columns="['cid', 'name']"
+                    :items="loadedBoxes"
                     :keyName="'item_uid'"
                 />
             </div>

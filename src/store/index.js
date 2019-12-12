@@ -17,10 +17,7 @@ const store = new Vuex.Store({
     loadedBoxes: [],
   },
   getters: {
-    getEventSlug: state => {
-      console.log('foo', state.events);
-      return state.route && state.route.params.event? state.route.params.event : state.events.length ? state.events[0].slug : '36C3';
-    },
+    getEventSlug: state => state.route && state.route.params.event? state.route.params.event : state.events.length ? state.events[0].slug : '36C3',
     getActiveView: state => state.route.name || 'items',
   },
   mutations: {
@@ -35,7 +32,10 @@ const store = new Vuex.Store({
     },
     setLayout(state, layout) {
       state.layout = layout;
-    }
+    },
+    replaceBoxes(state, loadedBoxes) {
+      state.loadedBoxes = loadedBoxes;
+    },
   },
   actions: {
     async loadEvents({ commit }) {
@@ -58,7 +58,14 @@ const store = new Vuex.Store({
       });
 
       commit('replaceLoadedItems', resp.data);
-    }
+    },
+    async loadBoxes({ commit }) {
+      const resp = await axios.get('https://c3lf.de/api/1/boxes',  {
+        auth: getAuth(),
+      });
+
+      commit('replaceBoxes', resp.data);
+    },
   }
 });
 
@@ -66,3 +73,4 @@ export default store;
 
 store.dispatch('loadEvents');
 store.dispatch('loadEventItems');
+store.dispatch('loadBoxes');
