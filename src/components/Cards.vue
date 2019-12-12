@@ -41,7 +41,6 @@
 <script>
 import DataContainer from '@/mixins/data-container';
 import router from '../router';
-import {mapState} from 'vuex';
 
 export default {
   name: 'Cards',
@@ -51,16 +50,10 @@ export default {
   },
   methods: {
     changeFilter(col, val) {
-      console.log('filter:', col, val);
       this.setFilter(col, val);
       let newquery = Object.entries({...this.$store.getters.getFilters, [col]: val}).reduce((a,[k,v]) => (v ? {...a, [k]:v} : a), {});
-      console.log(this.$store.getters.getFilters);
-      console.log('query:', newquery);
       router.push({query: newquery});
     },
-  },
-  computed: {
-    ...mapState(['route'])
   },
 };
 </script>
