@@ -11,25 +11,24 @@ Vue.use(Vuex);
 
 const store = new Vuex.Store({
   state: {
-    events: Array,
+    events: [],
     layout: 'cards',
-    loadedItems: Array,
-    loadedBoxes: Array,
+    loadedItems: [],
+    loadedBoxes: [],
   },
   getters: {
-    getEventSlug: state => state.route.params.event,
-    getActiveView: state => state.route.name,
+    getEventSlug: state => {
+      console.log('foo', state.events);
+      return state.route && state.route.params.event? state.route.params.event : state.events.length ? state.events[0].slug : '36C3';
+    },
+    getActiveView: state => state.route.name || 'items',
   },
   mutations: {
     replaceEvents(state, events) {
       state.events = events;
     },
-    changeEvent(state, event) {
-      router.push({path: `/${event.slug}/${state.currentview}`});
-    },
-    changeView(state, link) {
-      router.push({path: `/${state.route.params.event}/${link.path}`});
-      state.currentview = link.path;
+    changeView(state, {view, slug}) {
+      router.push({path: `/${slug}/${view}`});
     },
     replaceLoadedItems(state, newItems) {
       state.loadedItems = newItems;
@@ -46,15 +45,15 @@ const store = new Vuex.Store({
 
       commit('replaceEvents', resp.data);
     },
-    changeEvent({ commit, dispatch }, eventName) {
-      commit('changeEvent', eventName);
+    changeEvent({ dispatch, getters}, eventName) {
+      router.push({path: `/${eventName.slug}/${getters.getActiveView}`});
       dispatch('loadEventItems', eventName);
     },
-    changeView({ commit }, link) {
-      commit('changeView', link);
+    changeView({ getters }, link) {
+      router.push({path: `/${getters.getEventSlug}/${link.path}`});
     },
-    async loadEventItems({ commit, state }) {
-      const resp = await axios.get(`https://c3lf.de/api/1/${state.route.params.event}/items`,  {
+    async loadEventItems({ commit, getters }) {
+      const resp = await axios.get(`https://c3lf.de/api/1/${getters.getEventSlug}/items`,  {
         auth: getAuth(),
       });
 
