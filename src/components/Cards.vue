@@ -30,7 +30,12 @@
         </div>
         <div class="col-lg-9 col-xl-8">
             <div class="card-columns">
-                <div class="card-list-item card bg-dark text-light" v-for="item in internalItems" :key="item[keyName]">
+                <div
+                    class="card-list-item card bg-dark text-light"
+                    v-for="item in internalItems"
+                    :key="item[keyName]"
+                    @click="$emit('itemActivated', item)"
+                >
                     <slot v-bind:item="item"/>
                 </div>
             </div>

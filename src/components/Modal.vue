@@ -1,19 +1,26 @@
 <template>
     <div class="modal" tabindex="-1">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog modal-xl">
             <div class="modal-content bg-dark text-light border-secondary">
                 <div class="modal-header">
-                    <h5 class="modal-title">Modal title</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <font-awesome-icon icon="window-close" class="text-light"></font-awesome-icon>
+                    <h5 class="modal-title">{{ title }}</h5>
+                    <button type="button" class="close" @click="$emit('close')" aria-label="Close">
+                        <font-awesome-icon icon="window-close" class="text-light"/>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p>Modal body text goes here.</p>
+                    <slot name="body">
+                        <div class="alert alert-danger">
+                            Modal body is empty
+                        </div>
+                    </slot>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <slot name="buttons">
+                        <div class="alert alert-danger">
+                            Modal footer is empty
+                        </div>
+                    </slot>
                 </div>
             </div>
         </div>
@@ -22,7 +29,8 @@
 
 <script>
 export default {
-  name: 'Modal'
+  name: 'Modal',
+  props: ['title']
 };
 </script>
 
