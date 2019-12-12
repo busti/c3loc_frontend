@@ -20,8 +20,9 @@
                                 class="form-control"
                                 placeholder="filter"
                                 :value="filters[column]"
-                                @input="setFilter(column, $event.target.value)"
+                                @input="changeFilter(column, $event.target.value)"
                             >
+                        <!-- <input @change="someHandler"> -->
                         </div>
                     </div>
                 </div>
@@ -39,12 +40,27 @@
 
 <script>
 import DataContainer from '@/mixins/data-container';
+import router from '../router';
+import {mapState} from 'vuex';
 
 export default {
   name: 'Cards',
   mixins: [DataContainer],
+  created() {
+    this.columns.map(e => ({k: e, v: this.$store.getters.getFilters[e]})).filter(e => e.v).forEach(e => this.setFilter(e.k, e.v));
+  },
   methods: {
-    random: () => Math.floor((Math.random() * 500) + 300)
-  }
+    changeFilter(col, val) {
+      console.log('filter:', col, val);
+      this.setFilter(col, val);
+      let newquery = Object.entries({...this.$store.getters.getFilters, [col]: val}).reduce((a,[k,v]) => (v ? {...a, [k]:v} : a), {});
+      console.log(this.$store.getters.getFilters);
+      console.log('query:', newquery);
+      router.push({query: newquery});
+    },
+  },
+  computed: {
+    ...mapState(['route'])
+  },
 };
 </script>

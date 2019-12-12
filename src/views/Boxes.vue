@@ -5,7 +5,7 @@
                 <Table
                     :columns="['cid', 'name']"
                     :items="loadedBoxes"
-                    :keyName="'item_uid'"
+                    :keyName="'cid'"
                 />
             </div>
         </div>

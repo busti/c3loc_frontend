@@ -19,6 +19,7 @@ const store = new Vuex.Store({
   getters: {
     getEventSlug: state => state.route && state.route.params.event? state.route.params.event : state.events.length ? state.events[0].slug : '36C3',
     getActiveView: state => state.route.name || 'items',
+    getFilters: state => state.route.query,
   },
   mutations: {
     replaceEvents(state, events) {
@@ -28,7 +29,7 @@ const store = new Vuex.Store({
       router.push({path: `/${slug}/${view}`});
     },
     replaceLoadedItems(state, newItems) {
-      state.loadedItems = newItems;
+      state.loadedItems = newItems.map(e => ({...e, description: e.bezeichnung, box: e.container, uid: e.item_uid}));
     },
     setLayout(state, layout) {
       state.layout = layout;
