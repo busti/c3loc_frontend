@@ -67,7 +67,7 @@ export default {
     views: [
       {'title':'items','path':'items'},
       {'title':'boxes','path':'boxes'},
-      {'title':'mass-edit','path':'/#'},
+      //{'title':'mass-edit','path':'massedit'},
     ],
     links: [
       {'title':'howto engel','path':'/howto/'}

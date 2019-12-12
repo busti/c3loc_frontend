@@ -14,23 +14,22 @@ const store = new Vuex.Store({
     events: Array,
     layout: 'cards',
     loadedItems: Array,
-    currentview: 'items',
+    loadedBoxes: Array,
   },
   getters: {
     getEventSlug: state => state.route.params.event,
-    getActiveView: state => state.currentview,
+    getActiveView: state => state.route.name,
   },
   mutations: {
     replaceEvents(state, events) {
       state.events = events;
-      //if (!state.activeEvent || !events.includes(state.activeEvent))
-      //  state.activeEvent = _.reverse(events)[0];
     },
     changeEvent(state, event) {
-      router.push({path: `/${state.currentview}/${event.slug}`});
+      router.push({path: `/${event.slug}/${state.currentview}`});
     },
     changeView(state, link) {
-      router.push({path: `/${link.path}/${state.route.params.event}`});
+      router.push({path: `/${state.route.params.event}/${link.path}`});
+      state.currentview = link.path;
     },
     replaceLoadedItems(state, newItems) {
       state.loadedItems = newItems;
@@ -58,8 +57,6 @@ const store = new Vuex.Store({
       const resp = await axios.get(`https://c3lf.de/api/1/${state.route.params.event}/items`,  {
         auth: getAuth(),
       });
-
-      console.log(resp.data);
 
       commit('replaceLoadedItems', resp.data);
     }

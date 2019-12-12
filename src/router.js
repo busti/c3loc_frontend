@@ -9,9 +9,10 @@ import Vue from 'vue';
 Vue.use(VueRouter);
 
 const routes = [
-  { path: '/', redirect: '/items/36C3' },
-  { path: '/boxes/:event', component: Boxes},
-  { path: '/items/:event', component: Items},
+  { path: '/', redirect: '/36C3/items' },
+  { path: '/howto', component: Error},
+  { path: '/:event/boxes', name: 'boxes', component: Boxes},
+  { path: '/:event/items', name: 'items', component: Items},
   { path: '*', component: Error},
 ];
 
