@@ -71,6 +71,6 @@ const store = new Vuex.Store({
 
 export default store;
 
-store.dispatch('loadEvents');
-store.dispatch('loadEventItems');
-store.dispatch('loadBoxes');
+store.dispatch('loadEvents').then(() =>
+  store.dispatch('loadEventItems')
+);
