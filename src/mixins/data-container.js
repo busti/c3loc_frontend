@@ -13,7 +13,7 @@ export default {
         .map(column => {
           const field  = item[column] + '';
           const filter = this.filters[column];
-          return field.includes(filter);
+          return field.toLowerCase().includes(filter.toLowerCase());
         }).reduce((acc, nxt) => acc && nxt, true)
       );
       const sortByOrd = R.sortBy(R.prop(this.sortBy));
