@@ -5,12 +5,11 @@
                 <EditItem
                     :item="selectedItem"
                     badge="item_uid"
-                    :fields="['bezeichnung', 'container']"
                 />
             </template>
             <template #buttons>
                 <button type="button" class="btn btn-secondary" @click="closeModal()">Cancel</button>
-                <button type="button" class="btn btn-success">Save Changes</button>
+                <button type="button" class="btn btn-success" @click="saveSelectedItem()">Save Changes</button>
             </template>
         </Modal>
         <div class="row" v-if="layout === 'table'">
@@ -28,7 +27,7 @@
             :items="loadedItems"
             :keyName="'uid'"
             v-slot="{ item }"
-            @itemActivated="selectedItem = $event"
+            @itemActivated="openModalWith($event)"
         >
             <img
                 :src="`https://c3lf.de/api/1/thumbs/${item.file}`"
@@ -57,9 +56,15 @@ export default {
   components: { Table, Cards, Modal, EditItem },
   computed: mapState(['loadedItems', 'layout']),
   methods: {
-    closeModal: function () {
-      console.log('asdasd');
+    openModalWith(item) { // Opens the editing modal with a copy of the selected item.
+      this.selectedItem = { ...item };
+    },
+    closeModal() { // Closes the editing modal and discards the edited copy of the item.
       this.selectedItem = null;
+    },
+    saveSelectedItem() { // Saves the edited copy of the item.
+      this.$store.dispatch('updateItem', this.selectedItem);
+      this.closeModal();
     }
   }
 };

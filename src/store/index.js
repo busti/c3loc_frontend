@@ -67,6 +67,11 @@ const store = new Vuex.Store({
 
       commit('replaceBoxes', resp.data);
     },
+    async updateItem({ getters }, item) {
+      axios.put(`https://c3lf.de/api/1/${getters.getEventSlug}/item/${item.iid}`, item, {
+        auth: getAuth(),
+      });
+    }
   }
 });
 
