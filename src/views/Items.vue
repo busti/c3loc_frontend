@@ -18,6 +18,7 @@
                     :columns="['uid', 'description', 'box']"
                     :items="loadedItems"
                     :keyName="'uid'"
+                    @itemActivated="openModalWith($event)"
                 />
             </div>
         </div>

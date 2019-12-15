@@ -27,7 +27,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr v-for="item in internalItems" :key="item[keyName]">
+            <tr v-for="item in internalItems" :key="item[keyName]" @click="$emit('itemActivated', item)">
                 <td v-for="(column, index) in columns" :key="index">{{ item[column] }}</td>
             </tr>
         </tbody>
