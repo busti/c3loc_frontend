@@ -29,7 +29,7 @@ const store = new Vuex.Store({
       router.push({path: `/${slug}/${view}`});
     },
     replaceLoadedItems(state, newItems) {
-      state.loadedItems = newItems.map(e => ({...e, description: e.bezeichnung, box: e.container, uid: e.item_uid}));
+      state.loadedItems = newItems.map(e => ({...e, uid: e.item_uid}));
     },
     setLayout(state, layout) {
       state.layout = layout;
