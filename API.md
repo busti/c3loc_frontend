@@ -17,25 +17,25 @@ json endpoints returning a list should always be encapsulated ba an object to ma
 #### ``GET /api/<version.major>/<event.id>/items/<search_query>``
 Returns all results of a fuzzy search over all items for <search_query>. The <search_query> should be url-encoded. 
 
-#### ``GET /api/<version.major>/<event.id>/item/<item.id>``
+#### ``GET /api/<version.major>/<event.id>/item/<item.uid>``
 
-#### ``DELETE /api/<version.major>/<event.id>/item/<item.id>``
+#### ``DELETE /api/<version.major>/<event.id>/item/<item.uid>``
 
-#### ``PUT /api/<version.major>/<event.id>/item/<item.id>``
+#### ``PUT /api/<version.major>/<event.id>/item/<item.uid>``
 
-#### ``POST /api/<version.major>/<event.id>/item/<item.id>``
+#### ``POST /api/<version.major>/<event.id>/item/<item.uid>``
 
 ### Boxes
 
 #### ``GET /api/<version.major>/boxes``
 
-#### ``GET /api/<version.major>/box/<box.id>``
+#### ``GET /api/<version.major>/box/<box.cid>``
 
-#### ``DELETE /api/<version.major>/box/<box.id>``
+#### ``DELETE /api/<version.major>/box/<box.cid>``
 
-#### ``PUT /api/<version.major>/box/<box.id>``
+#### ``PUT /api/<version.major>/box/<box.cid>``
 
-#### ``POST /api/<version.major>/box/<box.id>``
+#### ``POST /api/<version.major>/box/<box.cid>``
 
 ### Events
 ```json
