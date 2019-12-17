@@ -15,6 +15,7 @@ const store = new Vuex.Store({
     layout: 'cards',
     loadedItems: [],
     loadedBoxes: [],
+    apiUrl: 'https://c3lf.de/api',
   },
   getters: {
     getEventSlug: state => state.route && state.route.params.event? state.route.params.event : state.events.length ? state.events[0].slug : '36C3',
@@ -39,8 +40,8 @@ const store = new Vuex.Store({
     },
   },
   actions: {
-    async loadEvents({ commit }) {
-      const resp = await axios.get('https://c3lf.de/api/1/events',  {
+    async loadEvents({ commit, state }) {
+      const resp = await axios.get(`${state.apiUrl}/1/events`,  {
         auth: getAuth(),
       });
 
@@ -53,22 +54,22 @@ const store = new Vuex.Store({
     changeView({ getters }, link) {
       router.push({path: `/${getters.getEventSlug}/${link.path}`});
     },
-    async loadEventItems({ commit, getters }) {
-      const resp = await axios.get(`https://c3lf.de/api/1/${getters.getEventSlug}/items`,  {
+    async loadEventItems({ commit, state, getters }) {
+      const resp = await axios.get(`${state.apiUrl}/1/${getters.getEventSlug}/items`,  {
         auth: getAuth(),
       });
 
       commit('replaceLoadedItems', resp.data);
     },
-    async loadBoxes({ commit }) {
-      const resp = await axios.get('https://c3lf.de/api/1/boxes',  {
+    async loadBoxes({ commit, state }) {
+      const resp = await axios.get(`${state.apiUrl}/1/boxes`,  {
         auth: getAuth(),
       });
 
       commit('replaceBoxes', resp.data);
     },
-    async updateItem({ getters }, item) {
-      axios.put(`https://c3lf.de/api/1/${getters.getEventSlug}/item/${item.iid}`, item, {
+    async updateItem({ getters, state }, item) {
+      axios.put(`${state.apiUrl}/1/${getters.getEventSlug}/item/${item.iid}`, item, {
         auth: getAuth(),
       });
     }

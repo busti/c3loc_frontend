@@ -2,3 +2,6 @@ root = true
 
 [*.js]
 indent_size = 2
+
+[*.vue]
+indent_size = 2
