@@ -24,3 +24,4 @@ yarn.lock
 *.sw?
 
 src/store/auth.js
+src/config.js

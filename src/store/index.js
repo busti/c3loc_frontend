@@ -1,13 +1,15 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import axios from 'axios';
+import AxiosBootstrap from 'axios';
+import config from '../config';
 //import * as _ from 'lodash/fp';
 import router from '../router';
 
-import getAuth from './auth';
-
 Vue.use(Vuex);
-
+const axios = AxiosBootstrap.create({
+  baseURL: config.service.url,
+  auth: config.service.auth
+});
 
 const store = new Vuex.Store({
   state: {
@@ -15,7 +17,6 @@ const store = new Vuex.Store({
     layout: 'cards',
     loadedItems: [],
     loadedBoxes: [],
-    apiUrl: 'https://c3lf.de/api',
   },
   getters: {
     getEventSlug: state => state.route && state.route.params.event? state.route.params.event : state.events.length ? state.events[0].slug : '36C3',
@@ -38,14 +39,15 @@ const store = new Vuex.Store({
     replaceBoxes(state, loadedBoxes) {
       state.loadedBoxes = loadedBoxes;
     },
+    updateItem(state, updatedItem) {
+      const item = state.loadedItems.filter(({ item_uid }) => item_uid === updatedItem.item_uid)[0];
+      Object.assign(item, updatedItem);
+    }
   },
   actions: {
-    async loadEvents({ commit, state }) {
-      const resp = await axios.get(`${state.apiUrl}/1/events`,  {
-        auth: getAuth(),
-      });
-
-      commit('replaceEvents', resp.data);
+    async loadEvents({ commit }) {
+      const { data } = await axios.get('/1/events');
+      commit('replaceEvents', data);
     },
     changeEvent({ dispatch, getters}, eventName) {
       router.push({path: `/${eventName.slug}/${getters.getActiveView}`});
@@ -54,24 +56,17 @@ const store = new Vuex.Store({
     changeView({ getters }, link) {
       router.push({path: `/${getters.getEventSlug}/${link.path}`});
     },
-    async loadEventItems({ commit, state, getters }) {
-      const resp = await axios.get(`${state.apiUrl}/1/${getters.getEventSlug}/items`,  {
-        auth: getAuth(),
-      });
-
-      commit('replaceLoadedItems', resp.data);
+    async loadEventItems({ commit, getters }) {
+      const { data } = await axios.get(`/1/${getters.getEventSlug}/items`);
+      commit('replaceLoadedItems', data);
     },
-    async loadBoxes({ commit, state }) {
-      const resp = await axios.get(`${state.apiUrl}/1/boxes`,  {
-        auth: getAuth(),
-      });
-
-      commit('replaceBoxes', resp.data);
+    async loadBoxes({ commit }) {
+      const { data } = await axios.get('/1/boxes');
+      commit('replaceBoxes', data);
     },
-    async updateItem({ getters, state }, item) {
-      axios.put(`${state.apiUrl}/1/${getters.getEventSlug}/item/${item.iid}`, item, {
-        auth: getAuth(),
-      });
+    async updateItem({ commit, getters }, item) {
+      const { data } = await axios.put(`/1/${getters.getEventSlug}/item/${item.iid}`, item);
+      commit('updateItem', data);
     }
   }
 });
