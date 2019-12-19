@@ -11,6 +11,11 @@ const axios = AxiosBootstrap.create({
   auth: config.service.auth
 });
 
+axios.interceptors.response.use(response => response, error => {
+  console.error(error); // todo: toast error
+  return Promise.reject(error);
+});
+
 const store = new Vuex.Store({
   state: {
     events: [],
