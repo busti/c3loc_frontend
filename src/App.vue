@@ -1,18 +1,31 @@
 <template>
     <div id="app">
-        <Navbar/>
-        <router-view></router-view>
+        <AddItem v-if="addModalOpen" @close="closeAddModal()" isModal="true"/>
+        <Navbar @addClicked="openAddModal()"/>
+        <router-view/>
     </div>
 </template>
 
 <script>
 import Navbar from '@/components/Navbar';
+import AddItem from '@/components/AddItem';
 import { mapState } from 'vuex';
 
 export default {
   name: 'app',
-  components: { Navbar },
-  computed: mapState(['loadedItems', 'layout'])
+  components: { Navbar, AddItem },
+  computed: mapState(['loadedItems', 'layout']),
+  data: () => ({
+    addModalOpen: false
+  }),
+  methods: {
+    openAddModal() {
+      this.addModalOpen = true;
+    },
+    closeAddModal() {
+      this.addModalOpen = false;
+    }
+  }
 };
 </script>
 

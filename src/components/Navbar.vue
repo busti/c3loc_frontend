@@ -12,8 +12,8 @@
         </div>
 
         <div class="custom-control-inline mr-1">
-            <button type="button" class="btn mx-1 text-nowrap" v-for="(button, index) in buttons" v-bind:key="index" :class="['btn-' + button.color]">
-                <font-awesome-icon :icon="button.icon"/><span class="d-none d-md-inline">&nbsp;{{ button.title }}</span>
+            <button type="button" class="btn mx-1 text-nowrap btn-success" @click="$emit('addClicked')">
+                <font-awesome-icon icon="plus"/><span class="d-none d-md-inline">&nbsp;Add</span>
             </button>
             <div class="btn-group btn-group-toggle">
                 <button :class="['btn', 'btn-info', { active: layout === 'cards' }]" @click="setLayout('cards')">
@@ -58,8 +58,7 @@
 </template>
 
 <script>
-import { mapState, mapActions, mapMutations, mapGetters} from 'vuex';
-
+import { mapState, mapActions, mapMutations, mapGetters } from 'vuex';
 
 export default {
   name: 'Navbar',
@@ -71,10 +70,6 @@ export default {
     ],
     links: [
       {'title':'howto engel','path':'/howto/'}
-    ],
-    buttons: [
-      { title: 'Add', icon: 'plus', color: 'success' },
-      //{ title: 'Refresh', icon: 'sync-alt', color: 'primary' },
     ]
   }),
   computed: {

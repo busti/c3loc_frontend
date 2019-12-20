@@ -47,6 +47,9 @@ const store = new Vuex.Store({
     updateItem(state, updatedItem) {
       const item = state.loadedItems.filter(({ item_uid }) => item_uid === updatedItem.item_uid)[0];
       Object.assign(item, updatedItem);
+    },
+    appendItem(state, item) {
+      state.loadedItems.push(item);
     }
   },
   actions: {
@@ -72,6 +75,12 @@ const store = new Vuex.Store({
     async updateItem({ commit, getters }, item) {
       const { data } = await axios.put(`/1/${getters.getEventSlug}/item/${item.iid}`, item);
       commit('updateItem', data);
+    },
+    async postItem({ commit, getters }, item) {
+      console.log('Image data URL is at', item.dataImage); // todo: use image data URI in the request somehow
+      const { data } = await axios.post(`/1/${getters.getEventSlug}/item`, item);
+      console.log(data); // todo: maybe preprocess item data?
+      commit('appendItem', data);
     }
   }
 });
