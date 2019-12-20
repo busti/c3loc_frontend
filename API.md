@@ -23,7 +23,7 @@ Returns all results of a fuzzy search over all items for <search_query>. The <se
 
 #### ``PUT /api/<version.major>/<event.id>/item/<item.uid>``
 
-#### ``POST /api/<version.major>/<event.id>/item/<item.uid>``
+#### ``POST /api/<version.major>/<event.id>/item``
 
 ### Boxes
 
