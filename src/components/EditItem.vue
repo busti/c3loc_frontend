@@ -6,7 +6,13 @@
         :src="item.dataImage || `https://c3lf.de/api/1/thumbs/${item.file}`"
         alt="Image not available."
       />
-      <video v-if="capturing" ref="video" class="img-fluid">Video stream not available.</video>
+      <video
+        v-if="capturing"
+        ref="video"
+        class="img-fluid rounded mx-auto d-block mb-3"
+      >
+        Video stream not available.
+      </video>
       <canvas ref="canvas" class="img-fluid d-none"/>
       <div v-if="capturing && !streaming" class="d-flex justify-content-center">
           <div class="spinner-grow text-danger" role="status">
