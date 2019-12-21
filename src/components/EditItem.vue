@@ -14,8 +14,8 @@
         Video stream not available.
       </video>
       <canvas ref="canvas" class="img-fluid d-none"/>
-      <div v-if="capturing && !streaming" class="d-flex justify-content-center">
-          <div class="spinner-grow text-danger" role="status">
+      <div class="row" v-if="capturing && !streaming">
+          <div class="spinner-grow text-danger mx-auto" role="status">
               <span class="sr-only">Loading...</span>
           </div>
       </div>
