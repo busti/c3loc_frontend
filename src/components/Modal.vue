@@ -63,4 +63,10 @@ export default {
         border: 1px solid black;
         padding: 10px;
     }
+
+    /* Hacky Fix, for this Issue: https://hannover.ccc.de/gitlab/c3lf/lffrontend/issues/26 */
+    .modal-body {
+      max-height: calc(100vh - 200px);
+      overflow-y: auto;
+    }
 </style>
