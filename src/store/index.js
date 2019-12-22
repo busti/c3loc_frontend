@@ -76,7 +76,7 @@ const store = new Vuex.Store({
       commit('replaceBoxes', data);
     },
     async updateItem({ commit, getters }, item) {
-      const { data } = await axios.put(`/1/${getters.getEventSlug}/item/${item.iid}`, item);
+      const { data } = await axios.put(`/1/${getters.getEventSlug}/item/${item.uid}`, item);
       commit('updateItem', data);
     },
     async postItem({ commit, getters }, item) {
