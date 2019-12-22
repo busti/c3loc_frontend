@@ -4,7 +4,11 @@
             <div class="col-xl-8 offset-xl-2">
                 <Table
                     :columns="['cid', 'name']"
-                    :actions="['enlarge']"
+                    :actions="[
+                      {name:'enlarge'},
+                      {name:'content', fun: (item,action) => showBoxContent(item.name)},
+                      {name:'delete'},
+                    ]"
                     :items="loadedBoxes"
                     :keyName="'cid'"
                 />
@@ -14,12 +18,14 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import {mapActions, mapState} from 'vuex';
 import Table from '@/components/Table';
+
 export default {
   name: 'Boxes',
   components: {Table},
   computed: mapState(['loadedBoxes', 'layout']),
+  methods: mapActions(['showBoxContent']),
 };
 </script>
 

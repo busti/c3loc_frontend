@@ -16,7 +16,10 @@
             <div class="col-xl-8 offset-xl-2">
                 <Table
                     :columns="['uid', 'description', 'box']"
-                    :actions="['enlarge', 'delete']"
+                    :actions="[
+                      {name: 'enlarge'},
+                      {name: 'delete'}
+                      ]"
                     :items="loadedItems"
                     :keyName="'uid'"
                     @itemActivated="openModalWith($event)"
@@ -26,7 +29,9 @@
         <Cards
             v-if="layout === 'cards'"
             :columns="['uid', 'description', 'box']"
-            :actions="['delete']"
+            :actions="[
+              {name: 'delete'}
+              ]"
             :items="loadedItems"
             :keyName="'uid'"
             v-slot="{ item }"

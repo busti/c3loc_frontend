@@ -24,11 +24,17 @@
                         >
                     </div>
                 </th>
+                <th>actions</th>
             </tr>
         </thead>
         <tbody>
             <tr v-for="item in internalItems" :key="item[keyName]" @click="$emit('itemActivated', item)">
                 <td v-for="(column, index) in columns" :key="index">{{ item[column] }}</td>
+                <td>
+                    <div class="btn-group">
+                      <button class="btn btn-outline-secondary" v-for="(action, a_index) in actions" :key="a_index" @click="action.fun&&action.fun(item, action)">{{action.name}}</button>
+                    </div>
+                </td>
             </tr>
         </tbody>
     </table>

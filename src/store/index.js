@@ -64,6 +64,9 @@ const store = new Vuex.Store({
     changeView({ getters }, link) {
       router.push({path: `/${getters.getEventSlug}/${link.path}`});
     },
+    showBoxContent({ getters }, box) {
+      router.push({path: `/${getters.getEventSlug}/items`, query: {box}});
+    },
     async loadEventItems({ commit, getters }) {
       const { data } = await axios.get(`/1/${getters.getEventSlug}/items`);
       commit('replaceLoadedItems', data);
