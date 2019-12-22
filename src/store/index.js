@@ -27,6 +27,7 @@ const store = new Vuex.Store({
     getEventSlug: state => state.route && state.route.params.event? state.route.params.event : state.events.length ? state.events[0].slug : '36C3',
     getActiveView: state => state.route.name || 'items',
     getFilters: state => state.route.query,
+    getBoxes: state => state.loadedBoxes
   },
   mutations: {
     replaceEvents(state, events) {
