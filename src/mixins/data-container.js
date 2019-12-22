@@ -1,7 +1,7 @@
 import * as R from 'ramda';
 
 export default {
-  props: ['columns', 'items', 'keyName'],
+  props: ['columns', 'items', 'actions', 'keyName'],
   data: (self) => ({
     sortBy: self.keyName,
     ascend: true,

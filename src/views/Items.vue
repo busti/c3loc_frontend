@@ -16,6 +16,7 @@
             <div class="col-xl-8 offset-xl-2">
                 <Table
                     :columns="['uid', 'description', 'box']"
+                    :actions="['enlarge', 'delete']"
                     :items="loadedItems"
                     :keyName="'uid'"
                     @itemActivated="openModalWith($event)"
@@ -25,13 +26,14 @@
         <Cards
             v-if="layout === 'cards'"
             :columns="['uid', 'description', 'box']"
+            :actions="['delete']"
             :items="loadedItems"
             :keyName="'uid'"
             v-slot="{ item }"
             @itemActivated="openModalWith($event)"
         >
             <img
-                :src="`https://c3lf.de/api/1/thumbs/${item.file}`"
+                :src="`${baseUrl}/1/thumbs/${item.file}`"
                 class="card-img-top img-fluid"
             >
             <div class="card-body">
@@ -48,11 +50,13 @@ import Cards from '@/components/Cards';
 import Modal from '@/components/Modal';
 import EditItem from '@/components/EditItem';
 import { mapState } from 'vuex';
+import config from '../config';
 
 export default {
   name: 'Items',
   data: () => ({
-    selectedItem: null
+    selectedItem: null,
+    baseUrl: config.service.url,
   }),
   components: { Table, Cards, Modal, EditItem },
   computed: mapState(['loadedItems', 'layout']),

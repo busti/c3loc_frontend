@@ -4,6 +4,7 @@
             <div class="col-xl-8 offset-xl-2">
                 <Table
                     :columns="['cid', 'name']"
+                    :actions="['enlarge']"
                     :items="loadedBoxes"
                     :keyName="'cid'"
                 />

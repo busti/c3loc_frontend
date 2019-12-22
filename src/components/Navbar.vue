@@ -37,11 +37,11 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item dropdown">
-                    <button class="btn nav-link dropdown-toggle" type="button" id="dropdownMenuButton"
+                    <button class="btn nav-link dropdown-toggle" type="button" id="dropdownMenuButton2"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         {{getActiveView}}
                     </button>
-                    <ul class="dropdown-menu bg-dark" aria-labelledby="dropdownMenuButton">
+                    <ul class="dropdown-menu bg-dark" aria-labelledby="dropdownMenuButton2">
                         <li class="" v-for="(link, index) in views" v-bind:key="index" :class="{ active: link.path === getActiveView }">
                             <a class="nav-link text-nowrap" href="#" @click="changeView(link)">{{ link.title }}</a>
                         </li>
