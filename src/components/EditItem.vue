@@ -7,16 +7,16 @@
             :on-capture="storeImage"
         />
         <InputString
-            label="cat"
+            label="description"
             :model="item"
             field="description"
             :validation-fn="str => str.length > 0"
         />
         <InputCombo
-            label="dog"
+            label="box"
             :model="item"
             field="box"
-            :options="boxes"
+            :options="getBoxes"
         />
     </div>
 </template>
