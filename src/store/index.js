@@ -80,8 +80,17 @@ const store = new Vuex.Store({
       commit('updateItem', data);
     },
     async postItem({ commit, getters }, item) {
-      console.log('Image data URL is at', item.dataImage); // todo: use image data URI in the request somehow
-      const { data } = await axios.post(`/1/${getters.getEventSlug}/item`, item);
+      let blob = await fetch(item.dataImage).then(res => res.blob());
+      let file = new File([blob], 'dot.png', blob);
+      delete item.dataImage;
+      item.image = file;
+      var formData = new FormData();
+      for ( var key in item ) formData.append(key, item[key]);
+      const { data } = await axios.post(`/1/${getters.getEventSlug}/item`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
       console.log(data); // todo: maybe preprocess item data?
       commit('appendItem', data);
     }
