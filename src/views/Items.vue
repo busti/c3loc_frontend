@@ -18,7 +18,7 @@
                     :columns="['uid', 'description', 'box']"
                     :actions="[
                       {name: 'enlarge'},
-                      {name: 'delete'}
+                      {name: 'delete',fun: item => deleteItem(item)}
                       ]"
                     :items="loadedItems"
                     :keyName="'uid'"
@@ -54,7 +54,7 @@ import Table from '@/components/Table';
 import Cards from '@/components/Cards';
 import Modal from '@/components/Modal';
 import EditItem from '@/components/EditItem';
-import { mapState } from 'vuex';
+import {mapActions, mapState} from 'vuex';
 import config from '../config';
 
 export default {
@@ -66,6 +66,7 @@ export default {
   components: { Table, Cards, Modal, EditItem },
   computed: mapState(['loadedItems', 'layout']),
   methods: {
+    ...mapActions(['deleteItem']),
     openModalWith(item) { // Opens the editing modal with a copy of the selected item.
       this.selectedItem = { ...item };
     },

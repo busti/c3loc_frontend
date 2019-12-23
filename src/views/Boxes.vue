@@ -6,7 +6,7 @@
                     :columns="['cid', 'name']"
                     :actions="[
                       {name:'enlarge'},
-                      {name:'content', fun: (item,action) => showBoxContent(item.name)},
+                      {name:'content', fun: item => showBoxContent(item.name)},
                       {name:'delete'},
                     ]"
                     :items="loadedBoxes"

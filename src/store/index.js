@@ -48,6 +48,9 @@ const store = new Vuex.Store({
       const item = state.loadedItems.filter(({ item_uid }) => item_uid === updatedItem.item_uid)[0];
       Object.assign(item, updatedItem);
     },
+    removeItem(state, item) {
+      state.loadedItems = state.loadedItems.filter(it => it !== item );
+    },
     appendItem(state, item) {
       state.loadedItems.push(item);
     }
@@ -78,6 +81,10 @@ const store = new Vuex.Store({
     async updateItem({ commit, getters }, item) {
       const { data } = await axios.put(`/1/${getters.getEventSlug}/item/${item.uid}`, item);
       commit('updateItem', data);
+    },
+    async deleteItem({ commit, getters }, item) {
+      await axios.delete(`/1/${getters.getEventSlug}/item/${item.uid}`, item);
+      commit('removeItem',item);
     },
     async postItem({ commit, getters }, item) {
       let blob = await fetch(item.dataImage).then(res => res.blob());
