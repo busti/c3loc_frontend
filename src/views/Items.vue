@@ -1,28 +1,29 @@
 <template>
     <div class="container-fluid px-xl-5 mt-3">
-        <Modal title="Edit Item" v-if="selectedItem" @close="closeModal()">
+        <Modal title="Edit Item" v-if="editingItem" @close="closeEditingModal()">
             <template #body>
                 <EditItem
-                    :item="selectedItem"
+                    :item="editingItem"
                     badge="item_uid"
                 />
             </template>
             <template #buttons>
-                <button type="button" class="btn btn-secondary" @click="closeModal()">Cancel</button>
-                <button type="button" class="btn btn-success" @click="saveSelectedItem()">Save Changes</button>
+                <button type="button" class="btn btn-secondary" @click="closeEditingModal()">Cancel</button>
+                <button type="button" class="btn btn-success" @click="saveEditingItem()">Save Changes</button>
             </template>
         </Modal>
+        <Lightbox v-if="lightboxItem" :file="lightboxItem.file" @close="closeLightboxModal()"/>
         <div class="row" v-if="layout === 'table'">
             <div class="col-xl-8 offset-xl-2">
                 <Table
                     :columns="['uid', 'description', 'box']"
                     :actions="[
-                      {name: 'enlarge'},
+                      {name: 'enlarge', fun: item => openEditingModalWith(item)},
                       {name: 'delete',fun: item => deleteItem(item)}
                       ]"
                     :items="loadedItems"
                     :keyName="'uid'"
-                    @itemActivated="openModalWith($event)"
+                    @itemActivated="openLightboxModalWith($event)"
                 />
             </div>
         </div>
@@ -35,7 +36,7 @@
             :items="loadedItems"
             :keyName="'uid'"
             v-slot="{ item }"
-            @itemActivated="openModalWith($event)"
+            @itemActivated="openLightboxModalWith($event)"
         >
             <img
                 :src="`${baseUrl}/1/thumbs/${item.file}`"
@@ -44,6 +45,11 @@
             <div class="card-body">
                 <h6 class="card-title">{{ item.description }}</h6>
                 <h6 class="card-subtitle text-secondary">uid: {{ item.uid }} box: {{ item.box }}</h6>
+                <div class="row mx-auto mt-2">
+                    <button class="btn btn-outline-secondary" @click.stop="openEditingModalWith(item)">
+                        Edit
+                    </button>
+                </div>
             </div>
         </Cards>
     </div>
@@ -56,26 +62,34 @@ import Modal from '@/components/Modal';
 import EditItem from '@/components/EditItem';
 import {mapActions, mapState} from 'vuex';
 import config from '../config';
+import Lightbox from '../components/Lightbox';
 
 export default {
   name: 'Items',
   data: () => ({
-    selectedItem: null,
+    lightboxItem: null,
+    editingItem: null,
     baseUrl: config.service.url,
   }),
-  components: { Table, Cards, Modal, EditItem },
+  components: {Lightbox, Table, Cards, Modal, EditItem },
   computed: mapState(['loadedItems', 'layout']),
   methods: {
     ...mapActions(['deleteItem']),
-    openModalWith(item) { // Opens the editing modal with a copy of the selected item.
-      this.selectedItem = { ...item };
+    openLightboxModalWith(item) { // Opens the editing modal with a copy of the selected item.
+      this.lightboxItem = { ...item };
     },
-    closeModal() { // Closes the editing modal and discards the edited copy of the item.
-      this.selectedItem = null;
+    closeLightboxModal() { // Closes the editing modal and discards the edited copy of the item.
+      this.lightboxItem = null;
     },
-    saveSelectedItem() { // Saves the edited copy of the item.
-      this.$store.dispatch('updateItem', this.selectedItem);
-      this.closeModal();
+    openEditingModalWith(item) {
+      this.editingItem = item;
+    },
+    closeEditingModal() {
+      this.editingItem = null;
+    },
+    saveEditingItem() { // Saves the edited copy of the item.
+      this.$store.dispatch('updateItem', this.editingItem);
+      this.closeLightboxModal();
     }
   }
 };
