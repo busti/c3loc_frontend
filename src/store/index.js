@@ -84,6 +84,7 @@ const store = new Vuex.Store({
       let file = new File([blob], 'dot.png', blob);
       delete item.dataImage;
       item.image = file;
+      item.cid = item.cid || 1;
       var formData = new FormData();
       for ( var key in item ) formData.append(key, item[key]);
       const { data } = await axios.post(`/1/${getters.getEventSlug}/item`, formData, {
