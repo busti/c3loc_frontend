@@ -10,13 +10,14 @@
             label="description"
             :model="item"
             field="description"
-            :validation-fn="str => str.length > 0"
+            :validation-fn="str => str && str.length > 0"
         />
         <InputCombo
             label="box"
             :model="item"
-            field="box"
-            :options="getBoxes"
+            nameKey="box"
+            uniqueKey="cid"
+            :options="boxes"
         />
     </div>
 </template>
@@ -34,7 +35,7 @@ export default {
   computed: {
     ...mapGetters(['getBoxes']),
     boxes({ getBoxes }) {
-      return getBoxes.map(box => box.name);
+      return getBoxes.map(obj => ({cid: obj.cid, box: obj.name}));
     }
   },
   methods: {
