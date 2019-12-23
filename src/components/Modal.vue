@@ -65,8 +65,8 @@ export default {
     }
 
     /* Hacky Fix, for this Issue: https://hannover.ccc.de/gitlab/c3lf/lffrontend/issues/26 */
-    .modal-body {
+    /*.modal-body {
       max-height: calc(100vh - 200px);
       overflow-y: auto;
-    }
+    }*/
 </style>

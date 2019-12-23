@@ -27,6 +27,7 @@ const store = new Vuex.Store({
     getEventSlug: state => state.route && state.route.params.event? state.route.params.event : state.events.length ? state.events[0].slug : '36C3',
     getActiveView: state => state.route.name || 'items',
     getFilters: state => state.route.query,
+    getBoxes: state => state.loadedBoxes
   },
   mutations: {
     replaceEvents(state, events) {
@@ -91,7 +92,6 @@ const store = new Vuex.Store({
       let file = new File([blob], 'dot.png', blob);
       delete item.dataImage;
       item.image = file;
-      item.cid = item.cid || 1;
       var formData = new FormData();
       for ( var key in item ) formData.append(key, item[key]);
       const { data } = await axios.post(`/1/${getters.getEventSlug}/item`, formData, {
