@@ -46,9 +46,14 @@
                 <h6 class="card-title">{{ item.description }}</h6>
                 <h6 class="card-subtitle text-secondary">uid: {{ item.uid }} box: {{ item.box }}</h6>
                 <div class="row mx-auto mt-2">
-                    <button class="btn btn-outline-secondary" @click.stop="openEditingModalWith(item)">
-                        Edit
-                    </button>
+                    <div class="btn-group">
+                        <button class="btn btn-outline-secondary" @click.stop="openEditingModalWith(item)">
+                            Edit
+                        </button>
+                        <button class="btn btn-outline-secondary" @click.stop="deleteItem(item)">
+                            Delete
+                        </button>
+                    </div>
                 </div>
             </div>
         </Cards>
