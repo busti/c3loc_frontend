@@ -10,7 +10,7 @@
                 >
                   <div class="btn-group">
                     <button class="btn btn-secondary" @click.stop="showBoxContent(item.name)" >
-                      <font-awesome-icon icon="archive"/> content
+                      <!--font-awesome-icon icon="archive"/--> content
                     </button>
                     <button class="btn btn-danger" @click.stop="" >
                       <font-awesome-icon icon="trash"/> delete
