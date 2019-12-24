@@ -9,8 +9,12 @@
                     v-slot="{ item }"
                 >
                   <div class="btn-group">
-                    <button class="btn btn-outline-secondary" @click.stop="showBoxContent(item.name)" >content</button>
-                    <button class="btn btn-outline-secondary" @click.stop="" >delete</button>
+                    <button class="btn btn-secondary" @click.stop="showBoxContent(item.name)" >
+                      <font-awesome-icon icon="archive"/> content
+                    </button>
+                    <button class="btn btn-danger" @click.stop="" >
+                      <font-awesome-icon icon="trash"/> delete
+                    </button>
                   </div>
                 </Table>
             </div>

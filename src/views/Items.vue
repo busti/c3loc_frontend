@@ -23,8 +23,12 @@
                     @itemActivated="openLightboxModalWith($event)"
                 >
                   <div class="btn-group">
-                    <button class="btn btn-outline-secondary" @click.stop="openEditingModalWith(item)" >edit</button>
-                    <button class="btn btn-outline-secondary" @click.stop="deleteItem(item)" >delete</button>
+                    <button class="btn btn-secondary" @click.stop="openEditingModalWith(item)" >
+                      <font-awesome-icon icon="edit"/>
+                    </button>
+                    <button class="btn btn-danger" @click.stop="deleteItem(item)" >
+                      <font-awesome-icon icon="trash"/>
+                    </button>
                   </div>
                 </Table>
             </div>
@@ -47,10 +51,10 @@
                 <div class="row mx-auto mt-2">
                     <div class="btn-group">
                         <button class="btn btn-outline-secondary" @click.stop="openEditingModalWith(item)">
-                            edit
+                          <font-awesome-icon icon="edit"/> edit
                         </button>
-                        <button class="btn btn-outline-secondary" @click.stop="deleteItem(item)">
-                            delete
+                        <button class="btn btn-outline-danger" @click.stop="deleteItem(item)">
+                          <font-awesome-icon icon="trash"/> delete
                         </button>
                     </div>
                 </div>
