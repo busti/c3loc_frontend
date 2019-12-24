@@ -3,7 +3,7 @@
         <template #body>
             <img
                 class="img-fluid rounded mx-auto d-block mb-3 w-100"
-                :src="`https://c3lf.de/api/1/thumbs/${file}`"
+                :src="`${baseUrl}/1/images/${file}`"
                 alt="Image not available."
                 id="lightbox-image"
             >
@@ -16,11 +16,15 @@
 
 <script>
 import Modal from '@/components/Modal';
+import config from '../config';
 
 export default {
   name: 'Lightbox',
   components: { Modal },
-  props: ['file']
+  props: ['file'],
+  data: ()=>({
+    baseUrl: config.service.url,
+  }),
 };
 </script>
 
