@@ -17,22 +17,21 @@
             <div class="col-xl-8 offset-xl-2">
                 <Table
                     :columns="['uid', 'description', 'box']"
-                    :actions="[
-                      {name: 'enlarge', fun: item => openEditingModalWith(item)},
-                      {name: 'delete',fun: item => deleteItem(item)}
-                      ]"
                     :items="loadedItems"
                     :keyName="'uid'"
+                    v-slot="{ item }"
                     @itemActivated="openLightboxModalWith($event)"
-                />
+                >
+                  <div class="btn-group">
+                    <button class="btn btn-outline-secondary" @click.stop="openEditingModalWith(item)" >edit</button>
+                    <button class="btn btn-outline-secondary" @click.stop="deleteItem(item)" >delete</button>
+                  </div>
+                </Table>
             </div>
         </div>
         <Cards
             v-if="layout === 'cards'"
             :columns="['uid', 'description', 'box']"
-            :actions="[
-              {name: 'delete'}
-              ]"
             :items="loadedItems"
             :keyName="'uid'"
             v-slot="{ item }"
@@ -48,10 +47,10 @@
                 <div class="row mx-auto mt-2">
                     <div class="btn-group">
                         <button class="btn btn-outline-secondary" @click.stop="openEditingModalWith(item)">
-                            Edit
+                            edit
                         </button>
                         <button class="btn btn-outline-secondary" @click.stop="deleteItem(item)">
-                            Delete
+                            delete
                         </button>
                     </div>
                 </div>

@@ -4,14 +4,15 @@
             <div class="col-xl-8 offset-xl-2">
                 <Table
                     :columns="['cid', 'name']"
-                    :actions="[
-                      {name:'enlarge'},
-                      {name:'content', fun: item => showBoxContent(item.name)},
-                      {name:'delete'},
-                    ]"
                     :items="loadedBoxes"
                     :keyName="'cid'"
-                />
+                    v-slot="{ item }"
+                >
+                  <div class="btn-group">
+                    <button class="btn btn-outline-secondary" @click.stop="showBoxContent(item.name)" >content</button>
+                    <button class="btn btn-outline-secondary" @click.stop="" >delete</button>
+                  </div>
+                </Table>
             </div>
         </div>
     </div>
