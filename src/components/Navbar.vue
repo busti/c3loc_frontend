@@ -31,7 +31,7 @@
         </button>
 
         <form class="form-inline mt-1 my-lg-auto my-xl-auto w-100 d-inline">
-            <input class="form-control w-100" type="search" placeholder="Search" aria-label="Search">
+            <input class="form-control w-100" type="search" placeholder="Search" aria-label="Search" @input="searchEventItems($event.target.value)">
         </form>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -77,7 +77,7 @@ export default {
     ...mapGetters(['getEventSlug', 'getActiveView']),
   },
   methods: {
-    ...mapActions(['changeEvent', 'changeView']),
+    ...mapActions(['changeEvent', 'changeView','searchEventItems']),
     ...mapMutations(['setLayout'])
   }
 };

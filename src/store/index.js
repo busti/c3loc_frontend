@@ -63,7 +63,7 @@ const store = new Vuex.Store({
     },
     changeEvent({ dispatch, getters}, eventName) {
       router.push({path: `/${eventName.slug}/${getters.getActiveView}`});
-      dispatch('loadEventItems', eventName);
+      dispatch('loadEventItems');
     },
     changeView({ getters }, link) {
       router.push({path: `/${getters.getEventSlug}/${link.path}`});
@@ -73,6 +73,10 @@ const store = new Vuex.Store({
     },
     async loadEventItems({ commit, getters }) {
       const { data } = await axios.get(`/1/${getters.getEventSlug}/items`);
+      commit('replaceLoadedItems', data);
+    },
+    async searchEventItems({ commit, getters }, query) {
+      const {data} = await axios.get(`/1/${getters.getEventSlug}/items/${btoa(query)}`);
       commit('replaceLoadedItems', data);
     },
     async loadBoxes({ commit }) {
