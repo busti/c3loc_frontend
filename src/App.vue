@@ -11,7 +11,7 @@
 
 <script>
 import Navbar from '@/components/Navbar';
-import AddItemModal from '@/components/AddItem';
+import AddItemModal from '@/components/AddItemModal';
 import Toast from './components/Toast';
 import { mapState, mapMutations } from 'vuex';
 
