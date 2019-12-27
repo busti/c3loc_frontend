@@ -17,7 +17,7 @@ import Modal from '@/components/Modal';
 import EditItem from '@/components/EditItem';
 
 export default {
-  name: 'AddItem',
+  name: 'AddItemModal',
   components: { Modal, EditItem },
   props: ['isModal'],
   data: () => ({
@@ -26,6 +26,7 @@ export default {
   methods: {
     saveNewItem() {
       this.$store.dispatch('postItem', this.item);
+      this.$emit('close');
     }
   }
 };

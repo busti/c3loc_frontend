@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-        <AddItem v-if="addModalOpen" @close="closeAddModal()" isModal="true"/>
+        <AddItemModal v-if="addModalOpen" @close="closeAddModal()" isModal="true"/>
         <Navbar @addClicked="openAddModal()"/>
         <router-view/>
         <div aria-live="polite" aria-atomic="true" class="d-flex justify-content-end align-items-start fixed-top mx-1 my-5 py-3" style="min-height: 200px; z-index: 100000">
@@ -11,13 +11,13 @@
 
 <script>
 import Navbar from '@/components/Navbar';
-import AddItem from '@/components/AddItem';
+import AddItemModal from '@/components/AddItem';
 import Toast from './components/Toast';
 import { mapState, mapMutations } from 'vuex';
 
 export default {
   name: 'app',
-  components: { Toast, Navbar, AddItem },
+  components: { Toast, Navbar, AddItemModal },
   computed: mapState(['loadedItems', 'layout', 'toasts']),
   data: () => ({
     addModalOpen: false

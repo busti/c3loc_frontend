@@ -97,7 +97,7 @@ export default {
     },
     saveEditingItem() { // Saves the edited copy of the item.
       this.$store.dispatch('updateItem', this.editingItem);
-      this.closeLightboxModal();
+      this.closeEditingModal();
     }
   }
 };
