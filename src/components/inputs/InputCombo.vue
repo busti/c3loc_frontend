@@ -14,6 +14,7 @@
                         :key="option[uniqueKey]"
                         class="dropdown-item"
                         @click="setInternalValue(option)"
+                        :class="{ active: option == selectedOption }"
                     >
                       {{ option[nameKey] }}
                     </a>
@@ -44,17 +45,17 @@ export default {
   props: [ 'label', 'model', 'nameKey', 'uniqueKey', 'options', 'onOptionAdd' ],
   data: ({ options, model, nameKey, uniqueKey }) => ({
     internalName: model[nameKey],
-    selectedOption: options.filter(e => e[uniqueKey] === model[uniqueKey])[0],
+    selectedOption: options.filter(e => e[uniqueKey] == model[uniqueKey])[0],
     addingOption: false
   }),
   computed: {
-    isValid: ({options, nameKey, internalName}) => options.some(e => e[nameKey] === internalName)
+    isValid: ({options, nameKey, internalName}) => options.some(e => e[nameKey] == internalName)
   },
   watch: {
     internalName(newValue, oldValue) {
       if (this.isValid) {
-        if(newValue!=this.selectedOption[this.nameKey]){
-          this.selectedOption = this.options.filter(e => e[this.nameKey] === this.internalName)[0];
+        if(!this.selectedOption || newValue!=this.selectedOption[this.nameKey]){
+          this.selectedOption = this.options.filter(e => e[this.nameKey] === newValue)[0];
         }
         this.model[this.nameKey] = this.selectedOption[this.nameKey];
         this.model[this.uniqueKey] = this.selectedOption[this.uniqueKey];
