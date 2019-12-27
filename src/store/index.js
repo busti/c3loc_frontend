@@ -12,16 +12,32 @@ const axios = AxiosBootstrap.create({
 });
 
 axios.interceptors.response.use(response => response, error => {
+  console.log('error interceptor fired');
   console.error(error); // todo: toast error
+  console.log(Object.entries(error));
+
+  if (error.isAxiosError) {
+    const message = `
+      <h3>A HTTP ${error.config.method} request failed.</h3>
+      <p>url: ${error.config.url}</p>
+      <p>timeout: ${!!error.request.timeout}</p>
+      <p>response-body: ${error.response && error.response.body}</p>
+    `;
+    store.commit('createToast', {title: 'HTTP Error', message, color: 'danger'});
+  } else {
+    store.commit('createToast', {title: 'Unknown Error', message: error.toString(), color: 'danger'});
+  }
   return Promise.reject(error);
 });
 
 const store = new Vuex.Store({
   state: {
+    keyIncrement: 0,
     events: [],
     layout: 'cards',
     loadedItems: [],
     loadedBoxes: [],
+    toasts: []
   },
   getters: {
     getEventSlug: state => state.route && state.route.params.event? state.route.params.event : state.events.length ? state.events[0].slug : '36C3',
@@ -54,6 +70,13 @@ const store = new Vuex.Store({
     },
     appendItem(state, item) {
       state.loadedItems.push(item);
+    },
+    createToast(state, { title, message, color }) {
+      state.toasts.push({ title, message, color, key: state.keyIncrement });
+      state.keyIncrement += 1;
+    },
+    removeToast(state, key) {
+      state.toasts = state.toasts.filter(toast => toast.key !== key);
     }
   },
   actions: {
@@ -103,5 +126,4 @@ export default store;
 store.dispatch('loadEvents').then(() =>{
   store.dispatch('loadEventItems');
   store.dispatch('loadBoxes');
-}
-);
+});
