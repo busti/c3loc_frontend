@@ -97,7 +97,7 @@ export default {
       const self = this;
       reader.onload = function () {
         self.dataImage = reader.result;
-        self.onCapture(this.dataImage);
+        self.onCapture(self.dataImage);
         self.closeStream();
       };
       reader.onerror = function (error) {
