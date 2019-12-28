@@ -5,6 +5,9 @@ import config from '../config';
 //import * as _ from 'lodash/fp';
 import router from '../router';
 
+import * as base64 from 'base-64';
+import * as utf8 from 'utf8';
+
 Vue.use(Vuex);
 const axios = AxiosBootstrap.create({
   baseURL: config.service.url,
@@ -99,7 +102,10 @@ const store = new Vuex.Store({
       commit('replaceLoadedItems', data);
     },
     async searchEventItems({ commit, getters }, query) {
-      const {data} = await axios.get(`/1/${getters.getEventSlug}/items/${btoa(query)}`);
+      const foo = utf8.encode(query);
+      const bar = base64.encode(foo);
+
+      const {data} = await axios.get(`/1/${getters.getEventSlug}/items/${bar}`);
       commit('replaceLoadedItems', data);
     },
     async loadBoxes({ commit }) {
