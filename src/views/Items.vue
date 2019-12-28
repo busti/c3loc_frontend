@@ -24,7 +24,7 @@
                 >
                   <div class="btn-group">
                     <button class="btn btn-success" @click.stop="markItemReturned(item)">
-                      <font-awesome-icon icon="check"/> returned
+                      <font-awesome-icon icon="check"/>
                     </button>
                     <button class="btn btn-secondary" @click.stop="openEditingModalWith(item)" >
                       <font-awesome-icon icon="edit"/>
