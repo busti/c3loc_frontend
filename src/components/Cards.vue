@@ -29,16 +29,20 @@
             </div>
         </div>
         <div class="col-lg-9 col-xl-8">
-            <div class="card-columns">
-                <div
-                    class="card-list-item card bg-dark text-light"
-                    v-for="item in internalItems"
-                    :key="item[keyName]"
-                    @click="$emit('itemActivated', item)"
-                >
-                    <slot v-bind:item="item"/>
-                </div>
+          <div class="row">
+            <div
+              class="mb-4 col-lg-4 col-xl-3"
+              v-for="item in internalItems"
+              :key="item[keyName]"
+              >
+              <div
+                  class="card-list-item card bg-dark text-light"
+                  @click="$emit('itemActivated', item)"
+              >
+                <slot v-bind:item="item"/>
+              </div>
             </div>
+          </div>
         </div>
     </div>
 </template>

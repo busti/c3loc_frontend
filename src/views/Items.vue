@@ -23,13 +23,13 @@
                     @itemActivated="openLightboxModalWith($event)"
                 >
                   <div class="btn-group">
-                    <button class="btn btn-success" @click.stop="markItemReturned(item)">
+                    <button class="btn btn-success" @click.stop="markItemReturned(item)" title="returned">
                       <font-awesome-icon icon="check"/>
                     </button>
-                    <button class="btn btn-secondary" @click.stop="openEditingModalWith(item)" >
+                    <button class="btn btn-secondary" @click.stop="openEditingModalWith(item)" title="edit">
                       <font-awesome-icon icon="edit"/>
                     </button>
-                    <button class="btn btn-danger" @click.stop="deleteItem(item)" >
+                    <button class="btn btn-danger" @click.stop="deleteItem(item)" title="delete">
                       <font-awesome-icon icon="trash"/>
                     </button>
                   </div>
@@ -53,14 +53,14 @@
                 <h6 class="card-subtitle text-secondary">uid: {{ item.uid }} box: {{ item.box }}</h6>
                 <div class="row mx-auto mt-2">
                     <div class="btn-group">
-                      <button class="btn btn-outline-success" @click.stop="markItemReturned(item)">
-                        <font-awesome-icon icon="check"/> returned
+                      <button class="btn btn-outline-success" @click.stop="markItemReturned(item)" title="returned">
+                        <font-awesome-icon icon="check"/>
                       </button>
-                      <button class="btn btn-outline-secondary" @click.stop="openEditingModalWith(item)">
-                        <font-awesome-icon icon="edit"/> edit
+                      <button class="btn btn-outline-secondary" @click.stop="openEditingModalWith(item)" title="edit">
+                        <font-awesome-icon icon="edit"/>
                       </button>
-                        <button class="btn btn-outline-danger" @click.stop="deleteItem(item)">
-                          <font-awesome-icon icon="trash"/> delete
+                        <button class="btn btn-outline-danger" @click.stop="deleteItem(item)" title="delete">
+                          <font-awesome-icon icon="trash"/>
                         </button>
                     </div>
                 </div>
