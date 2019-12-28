@@ -1,6 +1,6 @@
 <template>
     <div class="toast" :class="color && ('border-' + color)" role="alert" ref="toast" data-autohide="false">
-        <div class="toast-header">
+        <div class="toast-header" :class="[color && ('bg-' + color), color && 'text-light']">
             <strong class="mr-auto pr-3">{{ title }}</strong>
             <small>{{ displayTime }}</small>
             <button type="button" class="ml-2 mb-1 close" @click="close()">

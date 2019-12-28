@@ -22,13 +22,17 @@ axios.interceptors.response.use(response => response, error => {
   if (error.isAxiosError) {
     const message = `
       <h3>A HTTP ${error.config.method} request failed.</h3>
-      <p>url: ${error.config.url}</p>
-      <p>timeout: ${!!error.request.timeout}</p>
-      <p>response-body: ${error.response && error.response.body}</p>
+      <p>
+          url: ${error.config.url}
+          <br>
+          timeout: ${!!error.request.timeout}
+          <br>
+          response-body: ${error.response && error.response.body}
+      </p>
     `;
-    store.commit('createToast', {title: 'HTTP Error', message, color: 'danger'});
+    store.commit('createToast', {title: 'Error: HTTP', message, color: 'danger'});
   } else {
-    store.commit('createToast', {title: 'Unknown Error', message: error.toString(), color: 'danger'});
+    store.commit('createToast', {title: 'Error: Unknown', message: error.toString(), color: 'danger'});
   }
   return Promise.reject(error);
 });
