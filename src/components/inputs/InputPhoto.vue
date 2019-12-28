@@ -20,8 +20,12 @@
             </div>
         </div>
         <div class="row m-auto">
+            <label for="file" class="btn btn-info my-2">
+                <font-awesome-icon icon="save"/>&nbsp;Upload&nbsp;an&nbsp;image&nbsp;instead
+            </label>
+            <input type="file" id="file" accept="image/png" class="d-none" @change="onFileChange($event)">
             <button v-if="!capturing" class="btn my-2 ml-auto btn-secondary" @click="openStream()">
-                <font-awesome-icon icon="camera"/>
+              <font-awesome-icon icon="camera"/>
             </button>
             <div v-if="capturing" class="btn-group my-2 ml-auto">
                 <button class="btn btn-success" @click="captureVideoImage()">
@@ -40,6 +44,8 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex';
+
 export default {
   name: 'InputPhoto',
   props: [ 'model', 'field', 'onCapture' ],
@@ -50,6 +56,7 @@ export default {
     dataImage: undefined
   }),
   methods: {
+    ...mapMutations(['createToast']),
     openStream() {
       if (!this.capturing) {
         this.capturing = true;
@@ -82,6 +89,21 @@ export default {
         this.capturing = false;
         this.streaming = false;
       }
+    },
+    onFileChange({ target }) {
+      const file = target.files[0];
+      var reader = new FileReader();
+      reader.readAsDataURL(file);
+      const self = this;
+      reader.onload = function () {
+        self.dataImage = reader.result;
+        self.onCapture(this.dataImage);
+        self.closeStream();
+      };
+      reader.onerror = function (error) {
+        this.createToast({ title: 'Error: Failed to parse image file', message: error.toString(), color: 'danger' });
+        console.log('Error: ', error);
+      };
     }
   },
   mounted() {

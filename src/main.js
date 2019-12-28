@@ -11,10 +11,10 @@ import 'bootstrap/dist/js/bootstrap.min.js';
 
 // fontawesome
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faPlus, faCheckCircle, faEdit, faTrash, faCat, faSyncAlt, faSort, faSortUp, faSortDown, faTh, faList, faWindowClose, faCamera, faStop, faPen, faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faCheckCircle, faEdit, faTrash, faCat, faSyncAlt, faSort, faSortUp, faSortDown, faTh, faList, faWindowClose, faCamera, faStop, faPen, faCheck, faTimes, faSave } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
-library.add(faPlus, faCheckCircle, faEdit, faTrash, faCat, faSyncAlt, faSort, faSortUp, faSortDown, faTh, faList, faWindowClose, faCamera, faStop, faPen, faCheck, faTimes);
+library.add(faPlus, faCheckCircle, faEdit, faTrash, faCat, faSyncAlt, faSort, faSortUp, faSortDown, faTh, faList, faWindowClose, faCamera, faStop, faPen, faCheck, faTimes, faSave);
 
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 
