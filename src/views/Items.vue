@@ -23,6 +23,9 @@
                     @itemActivated="openLightboxModalWith($event)"
                 >
                   <div class="btn-group">
+                    <button class="btn btn-success" @click.stop="markItemReturned(item)">
+                      <font-awesome-icon icon="check"/> returned
+                    </button>
                     <button class="btn btn-secondary" @click.stop="openEditingModalWith(item)" >
                       <font-awesome-icon icon="edit"/>
                     </button>
@@ -50,9 +53,12 @@
                 <h6 class="card-subtitle text-secondary">uid: {{ item.uid }} box: {{ item.box }}</h6>
                 <div class="row mx-auto mt-2">
                     <div class="btn-group">
-                        <button class="btn btn-outline-secondary" @click.stop="openEditingModalWith(item)">
-                          <font-awesome-icon icon="edit"/> edit
-                        </button>
+                      <button class="btn btn-outline-success" @click.stop="markItemReturned(item)">
+                        <font-awesome-icon icon="check"/> returned
+                      </button>
+                      <button class="btn btn-outline-secondary" @click.stop="openEditingModalWith(item)">
+                        <font-awesome-icon icon="edit"/> edit
+                      </button>
                         <button class="btn btn-outline-danger" @click.stop="deleteItem(item)">
                           <font-awesome-icon icon="trash"/> delete
                         </button>
@@ -82,7 +88,7 @@ export default {
   components: {Lightbox, Table, Cards, Modal, EditItem },
   computed: mapState(['loadedItems', 'layout']),
   methods: {
-    ...mapActions(['deleteItem']),
+    ...mapActions(['deleteItem','markItemReturned']),
     openLightboxModalWith(item) { // Opens the editing modal with a copy of the selected item.
       this.lightboxItem = { ...item };
     },

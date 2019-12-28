@@ -120,6 +120,10 @@ const store = new Vuex.Store({
       const { data } = await axios.put(`/1/${getters.getEventSlug}/item/${item.uid}`, item);
       commit('updateItem', data);
     },
+    async markItemReturned({ commit, getters }, item) {
+      await axios.put(`/1/${getters.getEventSlug}/item/${item.uid}`, {returned: true});
+      commit('removeItem', item);
+    },
     async deleteItem({ commit, getters }, item) {
       await axios.delete(`/1/${getters.getEventSlug}/item/${item.uid}`, item);
       commit('removeItem',item);
