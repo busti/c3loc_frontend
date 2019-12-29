@@ -1,5 +1,5 @@
 <template>
-    <div class="modal" tabindex="-1">
+    <div class="modal" tabindex="-1" @keyup.esc="$emit('close')">
         <div class="modal-dialog modal-xl">
             <div class="modal-content bg-dark text-light border-secondary">
                 <div class="modal-header">
@@ -30,7 +30,10 @@
 <script>
 export default {
   name: 'Modal',
-  props: ['title']
+  props: ['title'],
+  mounted() {
+    this.$el.focus();
+  }
 };
 </script>
 
