@@ -28,8 +28,9 @@ export default {
   },
   methods: {
     saveNewItem() {
-      this.$store.dispatch('postItem', this.item);
-      this.$emit('close');
+      this.$store.dispatch('postItem', this.item).then(() => {
+        this.$emit('close');
+      });
     }
   }
 };
