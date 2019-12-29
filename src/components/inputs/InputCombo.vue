@@ -10,8 +10,8 @@
                 >Search</button>
                 <div class="dropdown-menu">
                     <a
-                        v-for="option in options"
-                        :key="option[uniqueKey]"
+                        v-for="(option, index) in sortedOptions"
+                        :key="index"
                         class="dropdown-item"
                         @click="setInternalValue(option)"
                         :class="{ active: option == selectedOption }"
@@ -49,7 +49,8 @@ export default {
     addingOption: false
   }),
   computed: {
-    isValid: ({options, nameKey, internalName}) => options.some(e => e[nameKey] == internalName)
+    isValid: ({options, nameKey, internalName}) => options.some(e => e[nameKey] == internalName),
+    sortedOptions: ({options, nameKey}) => options.sort((a, b) => a[nameKey] > b[nameKey]),
   },
   watch: {
     internalName(newValue, oldValue) {
