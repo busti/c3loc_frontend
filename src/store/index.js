@@ -2,7 +2,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import AxiosBootstrap from 'axios';
 import config from '../config';
-//import * as _ from 'lodash/fp';
+import * as _ from 'lodash/fp';
 import router from '../router';
 
 import * as base64 from 'base-64';
@@ -44,7 +44,8 @@ const store = new Vuex.Store({
     layout: 'cards',
     loadedItems: [],
     loadedBoxes: [],
-    toasts: []
+    toasts: [],
+    lastUsed: localStorage.getItem('lf_lastUsed') || {},
   },
   getters: {
     getEventSlug: state => state.route && state.route.params.event? state.route.params.event : state.events.length ? state.events[0].slug : '36C3',
@@ -53,6 +54,10 @@ const store = new Vuex.Store({
     getBoxes: state => state.loadedBoxes
   },
   mutations: {
+    updateLastUsed(state, diff) {
+      state.lastUsed = _.extend(state.lastUsed, diff);
+      localStorage.setItem('lf_lastUsed', state.lastUsed);
+    },
     replaceEvents(state, events) {
       state.events = events;
     },
@@ -129,6 +134,7 @@ const store = new Vuex.Store({
       commit('removeItem',item);
     },
     async postItem({ commit, getters }, item) {
+      commit('updateLastUsed',{box: item.box});
       const { data } = await axios.post(`/1/${getters.getEventSlug}/item`, item);
       commit('appendItem', data);
     }

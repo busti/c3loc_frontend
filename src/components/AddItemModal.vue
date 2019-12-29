@@ -23,6 +23,9 @@ export default {
   data: () => ({
     item: {}
   }),
+  created() {
+    this.item = {box: this.$store.state.lastUsed.box || ''};
+  },
   methods: {
     saveNewItem() {
       this.$store.dispatch('postItem', this.item);

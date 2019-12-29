@@ -53,7 +53,7 @@ export default {
     sortedOptions: ({options, nameKey}) => options.sort((a, b) => a[nameKey].localeCompare(b[nameKey], 'en', { numeric: true })),
   },
   watch: {
-    internalName(newValue, oldValue) {
+    internalName(newValue) {
       if (this.isValid) {
         if(!this.selectedOption || newValue!=this.selectedOption[this.nameKey]){
           this.selectedOption = this.options.filter(e => e[this.nameKey] === newValue)[0];
@@ -61,7 +61,6 @@ export default {
         this.model[this.nameKey] = this.selectedOption[this.nameKey];
         this.model[this.uniqueKey] = this.selectedOption[this.uniqueKey];
       }
-      console.log(oldValue, newValue, this.isValid);
     }
   },
   methods: {
