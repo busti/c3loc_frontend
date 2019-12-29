@@ -50,7 +50,7 @@ export default {
   }),
   computed: {
     isValid: ({options, nameKey, internalName}) => options.some(e => e[nameKey] == internalName),
-    sortedOptions: ({options, nameKey}) => options.sort((a, b) => a[nameKey] > b[nameKey]),
+    sortedOptions: ({options, nameKey}) => options.sort((a, b) => a[nameKey].localeCompare(b[nameKey], 'en', { numeric: true })),
   },
   watch: {
     internalName(newValue, oldValue) {
