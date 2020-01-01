@@ -2,18 +2,18 @@
     <div>
         <img
             v-if="!capturing"
-            class="img-fluid rounded mx-auto d-block mb-3"
+            class="img-fluid rounded mx-auto d-block mb-3 img-preview"
             :src="dataImage || `https://c3lf.de/api/1/thumbs/${model[field]}`"
             alt="Image not available."
         />
         <video
             v-if="capturing"
             ref="video"
-            class="img-fluid rounded mx-auto d-block mb-3"
+            class="img-fluid rounded mx-auto d-block mb-3 img-preview"
         >
             Video stream not available.
         </video>
-        <canvas ref="canvas" class="img-fluid d-none"/>
+        <canvas ref="canvas" class="img-fluid d-none img-preview"/>
         <div class="row" v-if="capturing && !streaming">
             <div class="spinner-grow text-danger mx-auto" role="status">
                 <span class="sr-only">Loading...</span>
@@ -115,3 +115,9 @@ export default {
   }
 };
 </script>
+
+<style>
+  .img-preview{
+    max-height: 30vh;
+  }
+</style>
