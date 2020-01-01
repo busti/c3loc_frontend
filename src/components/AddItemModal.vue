@@ -24,7 +24,7 @@ export default {
     item: {}
   }),
   created() {
-    this.item = {box: this.$store.state.lastUsed.box || ''};
+    this.item = {box: this.$store.state.lastUsed.box || '', cid: this.$store.state.lastUsed.cid || ''};
   },
   methods: {
     saveNewItem() {

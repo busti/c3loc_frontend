@@ -134,7 +134,7 @@ const store = new Vuex.Store({
       commit('removeItem',item);
     },
     async postItem({ commit, getters }, item) {
-      commit('updateLastUsed',{box: item.box});
+      commit('updateLastUsed',{box: item.box, cid: item.cid});
       const { data } = await axios.post(`/1/${getters.getEventSlug}/item`, item);
       commit('appendItem', data);
     }
